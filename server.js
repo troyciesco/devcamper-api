@@ -8,6 +8,7 @@ const connectDB = require("./config/db")
 // Load env vars
 dotenv.config({ path: "./config/config.env" })
 const bootcamps = require("./routes/bootcamps")
+const courses = require("./routes/courses")
 const errorHandler = require("./middleware/error")
 
 // Connect to database
@@ -27,6 +28,7 @@ if (process.env.NODE_ENV === "development") {
 
 // Mount routers
 app.use("/api/v1/bootcamps", bootcamps)
+app.use("/api/v1/courses", courses)
 
 // Middleware is processed in order, so this error handler has to be after the mounted routers
 app.use(errorHandler)
