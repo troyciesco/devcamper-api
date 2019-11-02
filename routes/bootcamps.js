@@ -2,11 +2,14 @@ const express = require("express")
 const {
 	getBootcamps,
 	getBootcamp,
+	getNearbyBootcamps,
 	createBootcamp,
 	updateBootcamp,
 	deleteBootcamp
 } = require("../controllers/bootcamps")
 const router = express.Router()
+
+router.route("/radius/:zipcode/:distance").get(getNearbyBootcamps)
 
 router
 	.route("/")
