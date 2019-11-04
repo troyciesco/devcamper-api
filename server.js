@@ -4,6 +4,7 @@ const dotenv = require("dotenv")
 const colors = require("colors")
 const fileupload = require("express-fileupload")
 const morgan = require("morgan")
+const cookieParser = require("cookie-parser")
 //const logger = require("./middleware/logger")
 const connectDB = require("./config/db")
 // Route files
@@ -22,7 +23,8 @@ const app = express()
 // Body parser
 app.use(express.json())
 
-//app.use(logger)
+// Cookie parser
+app.use(cookieParser())
 
 // Dev logging middleware
 if (process.env.NODE_ENV === "development") {
