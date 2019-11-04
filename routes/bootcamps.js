@@ -17,25 +17,28 @@ const courseRouter = require("./courses")
 
 const router = express.Router()
 
+// Require user to be logged in to do certain tasks
+const { protect } = require("../middleware/auth")
+
 // Re-route into other resource routers
 router.use("/:bootcampId/courses", courseRouter)
 
 router.route("/radius/:zipcode/:distance").get(getNearbyBootcamps)
 
-router.route("/:id/photo").put(bootcampPhotoUpload)
+router.route("/:id/photo").put(protect, bootcampPhotoUpload)
 
 router
 	.route("/")
 	// .get(getBootcamps)
 	// takes in the model and anything you want to populate
 	.get(advancedResults(Bootcamp, "courses"), getBootcamps)
-	.post(createBootcamp)
+	.post(protect, createBootcamp)
 
 router
 	.route("/:id")
 	.get(getBootcamp)
-	.put(updateBootcamp)
-	.delete(deleteBootcamp)
+	.put(protect, updateBootcamp)
+	.delete(protect, deleteBootcamp)
 
 // router.get("/", (req, res) => {
 // 	//res.send("hello from express")
